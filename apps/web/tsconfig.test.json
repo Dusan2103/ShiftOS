@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "target": "ES2021",
+    "skipLibCheck": true,
+    "strict": false,
+    "jsx": "react-jsx"
+  },
+  "include": ["test"]
+}
