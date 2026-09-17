@@ -1,0 +1,312 @@
+@import 'tailwindcss';
+
+/* ==========================================================================
+   ShiftOS — neumorphic (soft UI) dizajn sistem
+   Vrednosti tačno prema projektnom brifu, sekcija 7.
+   ========================================================================== */
+
+@theme {
+  --color-bg: #e8ecf2;
+  --color-surface: #eef2f7;
+  --color-primary: #2e6bf0;
+  --color-primary-dark: #1e4fd8;
+  --color-text: #2a3345;
+  --color-text-muted: #8a94a6;
+  --color-success: #34c77b;
+  --color-warning: #f0a93e;
+  --color-critical: #e5533c;
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+
+  --radius-neu-sm: 16px;
+  --radius-neu-md: 20px;
+  --radius-neu-lg: 28px;
+}
+
+html,
+body {
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  -webkit-tap-highlight-color: transparent;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* -------------------------------------------------------------------------
+   Osnovne neumorphic senke
+   ------------------------------------------------------------------------- */
+
+.neu-raised {
+  background: var(--color-surface);
+  box-shadow:
+    8px 8px 16px rgba(163, 177, 198, 0.6),
+    -8px -8px 16px rgba(255, 255, 255, 0.9);
+}
+
+.neu-inset {
+  background: var(--color-surface);
+  box-shadow:
+    inset 4px 4px 8px rgba(163, 177, 198, 0.6),
+    inset -4px -4px 8px rgba(255, 255, 255, 0.9);
+}
+
+.neu-raised-sm {
+  background: var(--color-surface);
+  box-shadow:
+    4px 4px 10px rgba(163, 177, 198, 0.55),
+    -4px -4px 10px rgba(255, 255, 255, 0.85);
+}
+
+/* -------------------------------------------------------------------------
+   Kartica
+   ------------------------------------------------------------------------- */
+
+.neu-card {
+  background: var(--color-surface);
+  border-radius: var(--radius-neu-lg);
+  box-shadow:
+    8px 8px 16px rgba(163, 177, 198, 0.6),
+    -8px -8px 16px rgba(255, 255, 255, 0.9);
+}
+
+/* -------------------------------------------------------------------------
+   Dugmad
+   ------------------------------------------------------------------------- */
+
+.neu-btn {
+  background: var(--color-surface);
+  border-radius: var(--radius-neu-sm);
+  color: var(--color-text);
+  box-shadow:
+    6px 6px 12px rgba(163, 177, 198, 0.6),
+    -6px -6px 12px rgba(255, 255, 255, 0.9);
+  transition:
+    box-shadow 0.12s ease,
+    transform 0.12s ease;
+}
+
+.neu-btn:active,
+.neu-btn[data-pressed='true'] {
+  box-shadow:
+    inset 4px 4px 8px rgba(163, 177, 198, 0.6),
+    inset -4px -4px 8px rgba(255, 255, 255, 0.9);
+  transform: translateY(1px);
+}
+
+.neu-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.neu-btn-primary {
+  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+  border-radius: var(--radius-neu-sm);
+  color: white;
+  box-shadow:
+    6px 6px 14px rgba(46, 107, 240, 0.4),
+    -4px -4px 12px rgba(255, 255, 255, 0.7);
+  transition:
+    box-shadow 0.12s ease,
+    transform 0.12s ease;
+}
+
+.neu-btn-primary:active {
+  transform: translateY(1px);
+  box-shadow:
+    3px 3px 8px rgba(46, 107, 240, 0.45),
+    -2px -2px 6px rgba(255, 255, 255, 0.5);
+}
+
+.neu-btn-primary:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+/* -------------------------------------------------------------------------
+   Input polja (utisnuta)
+   ------------------------------------------------------------------------- */
+
+.neu-input {
+  background: var(--color-surface);
+  border-radius: var(--radius-neu-sm);
+  box-shadow:
+    inset 4px 4px 8px rgba(163, 177, 198, 0.6),
+    inset -4px -4px 8px rgba(255, 255, 255, 0.9);
+  color: var(--color-text);
+}
+
+.neu-input::placeholder {
+  color: var(--color-text-muted);
+}
+
+/* -------------------------------------------------------------------------
+   Ikonica u krugu
+   ------------------------------------------------------------------------- */
+
+.neu-icon-circle {
+  background: var(--color-surface);
+  border-radius: 9999px;
+  box-shadow:
+    6px 6px 12px rgba(163, 177, 198, 0.6),
+    -6px -6px 12px rgba(255, 255, 255, 0.9);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: box-shadow 0.12s ease;
+}
+
+.neu-icon-circle[data-active='true'] {
+  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+  box-shadow:
+    4px 4px 10px rgba(46, 107, 240, 0.4),
+    -3px -3px 8px rgba(255, 255, 255, 0.6);
+  color: white;
+}
+
+/* -------------------------------------------------------------------------
+   Toggle prekidač
+   ------------------------------------------------------------------------- */
+
+.neu-toggle-track {
+  width: 52px;
+  height: 30px;
+  border-radius: 9999px;
+  background: var(--color-surface);
+  box-shadow:
+    inset 3px 3px 6px rgba(163, 177, 198, 0.6),
+    inset -3px -3px 6px rgba(255, 255, 255, 0.9);
+  position: relative;
+  transition: background 0.15s ease;
+  cursor: pointer;
+}
+
+.neu-toggle-track[data-on='true'] {
+  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+}
+
+.neu-toggle-thumb {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 24px;
+  height: 24px;
+  border-radius: 9999px;
+  background: var(--color-surface);
+  box-shadow: 2px 2px 6px rgba(163, 177, 198, 0.7);
+  transition: transform 0.15s ease;
+}
+
+.neu-toggle-track[data-on='true'] .neu-toggle-thumb {
+  transform: translateX(22px);
+  background: white;
+}
+
+/* -------------------------------------------------------------------------
+   Slider
+   ------------------------------------------------------------------------- */
+
+.neu-slider-track {
+  height: 12px;
+  border-radius: 9999px;
+  background: var(--color-surface);
+  box-shadow:
+    inset 3px 3px 6px rgba(163, 177, 198, 0.6),
+    inset -3px -3px 6px rgba(255, 255, 255, 0.9);
+  position: relative;
+}
+
+.neu-slider-fill {
+  height: 100%;
+  border-radius: 9999px;
+  background: linear-gradient(90deg, var(--color-primary), var(--color-primary-dark));
+}
+
+.neu-slider-thumb {
+  position: absolute;
+  top: 50%;
+  width: 26px;
+  height: 26px;
+  border-radius: 9999px;
+  background: var(--color-surface);
+  box-shadow:
+    4px 4px 8px rgba(163, 177, 198, 0.6),
+    -4px -4px 8px rgba(255, 255, 255, 0.9);
+  transform: translate(-50%, -50%);
+}
+
+/* -------------------------------------------------------------------------
+   Dropdown
+   ------------------------------------------------------------------------- */
+
+.neu-dropdown {
+  background: var(--color-surface);
+  border-radius: var(--radius-neu-sm);
+  box-shadow:
+    6px 6px 12px rgba(163, 177, 198, 0.6),
+    -6px -6px 12px rgba(255, 255, 255, 0.9);
+  color: var(--color-text);
+}
+
+/* -------------------------------------------------------------------------
+   Status boje (pokrivenost, anomalije, ishodi)
+   ------------------------------------------------------------------------- */
+
+.status-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 9999px;
+  display: inline-block;
+}
+
+.status-success {
+  color: var(--color-success);
+}
+.status-warning {
+  color: var(--color-warning);
+}
+.status-critical {
+  color: var(--color-critical);
+}
+.bg-status-success {
+  background: var(--color-success);
+}
+.bg-status-warning {
+  background: var(--color-warning);
+}
+.bg-status-critical {
+  background: var(--color-critical);
+}
+
+/* Skrivanje scrollbar-a na horizontalnim trakama (vremenska traka) dok ostaje skrolabilno */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  scrollbar-width: none;
+}
+
+@keyframes infoModalUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.info-oznaka {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+}
+@media (min-width: 640px) {
+  .info-oznaka {
+    top: 1rem;
+    right: 1rem;
+  }
+}
