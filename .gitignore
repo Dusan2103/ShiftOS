@@ -33,6 +33,7 @@ apps/web/public/workbox-*.js
 apps/web/public/sw.js.map
 apps/web/public/worker-*.js
 apps/web/public/fallback-*.js
+apps/web/public/swe-worker-*.js
 
 android/.gradle/
 android/local.properties
