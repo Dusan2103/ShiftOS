@@ -1,0 +1,35 @@
+export enum Uloga {
+  RADNIK = 'RADNIK',
+  NADZORNIK = 'NADZORNIK',
+  ADMINISTRATOR = 'ADMINISTRATOR',
+}
+
+export enum StatusNaloga {
+  NA_CEKANJU = 'NA_CEKANJU',
+  AKTIVAN = 'AKTIVAN',
+  ODBIJEN = 'ODBIJEN',
+  DEAKTIVIRAN = 'DEAKTIVIRAN',
+}
+
+export enum IshodZadatka {
+  USPESNO = 'USPESNO',
+  NEUSPESNO = 'NEUSPESNO',
+}
+
+export enum RazlogOdbijanja {
+  NEDOSTAJE_KVALIFIKACIJA = 'NEDOSTAJE_KVALIFIKACIJA',
+  KAPACITET_POPUNJEN = 'KAPACITET_POPUNJEN',
+}
+
+export enum StatusPokrivenosti {
+  POKRIVEN = 'POKRIVEN',
+  NEDOVOLJNO = 'NEDOVOLJNO',
+  PRAZAN = 'PRAZAN',
+}
+
+export enum TipDogadjaja {
+  ULAZAK_ODOBREN = 'ULAZAK_ODOBREN',
+  ULAZAK_ODBIJEN = 'ULAZAK_ODBIJEN',
+  IZLAZAK = 'IZLAZAK',
+  ANOMALIJA = 'ANOMALIJA',
+}
