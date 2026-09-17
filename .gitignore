@@ -51,3 +51,6 @@ coverage/
 
 # Unrelated standalone project (has its own git repo)
 claude-watermark-remover/
+
+# Tekst rada čuva se odvojeno od koda
+*.docx
