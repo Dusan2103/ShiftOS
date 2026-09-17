@@ -1,0 +1,152 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Kvalifikacija {
+  id        String                 @id @default(cuid())
+  naziv     String                 @unique
+  sektori   Sektor[]
+  radnici   RadnikKvalifikacija[]
+  createdAt DateTime               @default(now())
+}
+
+model Sektor {
+  id                      String            @id @default(cuid())
+  naziv                   String            @unique
+  potrebnaKvalifikacijaId String
+  potrebnaKvalifikacija   Kvalifikacija     @relation(fields: [potrebnaKvalifikacijaId], references: [id])
+  minimum                 Int
+  kapacitet               Int
+  posete                  Poseta[]
+  zadaciSabloni           ZadatakSablon[]
+  statistika              SektorStatistika?
+  dogadjaji               DogadjajLog[]
+  zadaciDodele            ZadatakDodela[]
+  terminali               Terminal[]
+  createdAt               DateTime          @default(now())
+}
+
+model Terminal {
+  id         String   @id @default(cuid())
+  naziv      String?
+  sektorId   String
+  sektor     Sektor   @relation(fields: [sektorId], references: [id])
+  createdAt  DateTime @default(now())
+  azuriranAt DateTime @updatedAt
+}
+
+model ZadatakSablon {
+  id                String @id @default(cuid())
+  sektorId          String
+  sektor            Sektor @relation(fields: [sektorId], references: [id], onDelete: Cascade)
+  naziv             String
+  ocekivanoTrajanje Int
+}
+
+model SektorStatistika {
+  id          String @id @default(cuid())
+  sektorId    String @unique
+  sektor      Sektor @relation(fields: [sektorId], references: [id], onDelete: Cascade)
+  brojUzoraka Int    @default(0)
+  prosek      Float  @default(0)
+  m2          Float  @default(0)
+}
+
+model Radnik {
+  id            String                @id @default(cuid())
+  ime           String
+
+  nfcTagId      String?               @unique
+  kvalifikacije RadnikKvalifikacija[]
+  posete        Poseta[]
+  korisnik      Korisnik?
+  dogadjaji     DogadjajLog[]
+  zadaciDodele  ZadatakDodela[]
+  createdAt     DateTime              @default(now())
+}
+
+model RadnikKvalifikacija {
+  radnikId        String
+  kvalifikacijaId String
+  radnik          Radnik        @relation(fields: [radnikId], references: [id], onDelete: Cascade)
+  kvalifikacija   Kvalifikacija @relation(fields: [kvalifikacijaId], references: [id], onDelete: Cascade)
+
+  @@id([radnikId, kvalifikacijaId])
+}
+
+model Poseta {
+  id           String    @id @default(cuid())
+  radnikId     String
+  sektorId     String
+  radnik       Radnik    @relation(fields: [radnikId], references: [id])
+  sektor       Sektor    @relation(fields: [sektorId], references: [id])
+  vremeUlaska  DateTime
+  vremeIzlaska DateTime?
+  anomalija    Boolean   @default(false)
+  zScore       Float?
+
+  idempotencyKeyUlazak   String  @unique
+  idempotencyKeyIzlazak  String? @unique
+
+  zadatak   Zadatak?
+  createdAt DateTime @default(now())
+
+  @@index([sektorId, vremeIzlaska])
+  @@index([radnikId])
+}
+
+model Zadatak {
+  id                String  @id @default(cuid())
+  posetaId          String  @unique
+  poseta            Poseta  @relation(fields: [posetaId], references: [id], onDelete: Cascade)
+  naziv             String
+  ocekivanoTrajanje Int
+  stvarnoTrajanje   Int?
+  ishod             String?
+}
+
+model ZadatakDodela {
+  id                String   @id @default(cuid())
+  radnikId          String
+  radnik            Radnik   @relation(fields: [radnikId], references: [id], onDelete: Cascade)
+  sektorId          String
+  sektor            Sektor   @relation(fields: [sektorId], references: [id], onDelete: Cascade)
+  naziv             String
+  ocekivanoTrajanje Int
+
+  datum             DateTime
+  izvrseno          Boolean  @default(false)
+  createdAt         DateTime @default(now())
+
+  @@index([radnikId, datum])
+  @@index([sektorId, datum])
+}
+
+model Korisnik {
+  id          String   @id @default(cuid())
+  email       String   @unique
+  lozinkaHash String
+  uloga       String
+
+  status      String   @default("AKTIVAN")
+  radnikId    String?  @unique
+  radnik      Radnik?  @relation(fields: [radnikId], references: [id])
+  createdAt   DateTime @default(now())
+}
+
+model DogadjajLog {
+  id       String   @id @default(cuid())
+  tip      String
+  vreme    DateTime @default(now())
+  radnikId String?
+  sektorId String?
+  detalji  String?
+  radnik   Radnik?  @relation(fields: [radnikId], references: [id])
+  sektor   Sektor?  @relation(fields: [sektorId], references: [id])
+
+  @@index([vreme])
+}
