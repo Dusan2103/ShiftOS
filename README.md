@@ -4,9 +4,6 @@ Sistem za kontrolu pristupa sektorima i detekciju anomalija u proizvodnom
 pogonu — praktični deo diplomskog rada *"ShiftOS: Kontrola pristupa i
 detekcija anomalija u pogonu"* (Univerzitet Singidunum, Tehnički fakultet).
 
-Rad se nalazi u [`DIPLOMSKI.docx`](./DIPLOMSKI.docx), a uputstvo za puštanje
-sistema online u [`DEPLOYMENT.md`](./DEPLOYMENT.md).
-
 ## Šta sistem radi
 
 Radnik prilazi kontrolnim vratima sektora i svojim telefonom očitava QR kod
