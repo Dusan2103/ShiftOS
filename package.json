@@ -1,0 +1,30 @@
+{
+  "name": "shiftos",
+  "private": true,
+  "version": "0.1.0",
+  "description": "ShiftOS — sistem za kontrolu pristupa sektorima i detekciju anomalija u proizvodnom pogonu",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev:web": "npm run dev --workspace=apps/web",
+    "dev:api": "npm run start:dev --workspace=apps/api",
+    "build": "npm run build --workspace=packages/shared && npm run build --workspace=apps/api && npm run build --workspace=apps/web",
+    "build:shared": "npm run build --workspace=packages/shared",
+    "bundle:function": "esbuild netlify/functions/api.js --bundle --platform=node --target=node18 --format=cjs --external:bcrypt --external:@prisma/client --external:.prisma/client --external:reflect-metadata --external:@nestjs/microservices --external:@nestjs/websockets --alias:@nestjs/swagger=./netlify/functions/nestjs-swagger-shim.js --outfile=netlify/functions/api.js --allow-overwrite --log-level=warning",
+    "db:migrate": "npm run prisma:migrate --workspace=apps/api",
+    "db:seed": "npm run seed --workspace=apps/api",
+    "test": "npm run test --workspace=packages/shared && npm run test --workspace=apps/api",
+    "test:e2e": "npm run test:e2e --workspace=apps/api",
+    "test:integracija": "npm run test:integracija --workspace=apps/web",
+    "experiments": "npm run experiments --workspace=apps/api"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "devDependencies": {
+    "esbuild": "^0.28.2",
+    "typescript": "5.9.3"
+  }
+}
