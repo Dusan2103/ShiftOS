@@ -37,6 +37,9 @@ apps/web/public/fallback-*.js
 android/.gradle/
 android/local.properties
 android/app/build/
+android/.kotlin/
+android/build/
+android/app/src/main/assets/www/
 
 apps/api/experiments/output/
 
