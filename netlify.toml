@@ -1,0 +1,21 @@
+[build]
+  command = "npm install && npm run build:shared && npx prisma generate --config=apps/api/prisma.config.ts --schema=apps/api/prisma/schema.prisma && npx prisma migrate deploy --config=apps/api/prisma.config.ts --schema=apps/api/prisma/schema.prisma && rm -rf apps/api/dist && npm run build --workspace=apps/api && test -f apps/api/dist/app.module.js && npm run bundle:function && npm run build --workspace=apps/web"
+  publish = "apps/web/.next"
+
+[build.environment]
+  NEXT_PUBLIC_API_URL = "/api"
+  NODE_VERSION = "22"
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
+
+[functions]
+  directory = "netlify/functions"
+  node_bundler = "nft"
+  included_files = ["node_modules/.prisma/client/**", "apps/api/prisma/schema.prisma"]
+
+[[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions/api/:splat"
+  status = 200
+  force = true
